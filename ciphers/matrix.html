@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles.css">
 
-    <title>Шифр Виженера</title>
+    <title>Матричный Шифр</title>
 </head>
 
 <body class="main-bg">
@@ -21,7 +21,7 @@
 
     <main>
         <div class="container pt-1">
-            <h1 class="pb-2 text-center oran-text">Шифр Виженера</h1>
+            <h1 class="pb-2 text-center oran-text">Матричный Шифр</h1>
             <div class="heading-line mx-auto"></div>
 
             <div class="row pt-5 pb-4"> 
@@ -35,7 +35,23 @@
 
                 <div class="col-12 col-md-2 px-4 pt-4">
                     <h3 class="text-center oran-text pb-3">Ключ</h3>
-                    <input type="text" class="form-control bg-dark text-white bg-opacity-25 text-center" name="cipherKey" id="cipherKey" placeholder="Введите Ключ">
+                    <div class="key-table">
+                        <div class="row">
+                            <input class="col-4 bg-dark text-white bg-opacity-25 text-center key-matrix" type="text">
+                            <input class="col-4 bg-dark text-white bg-opacity-25 text-center key-matrix" type="text">
+                            <input class="col-4 bg-dark text-white bg-opacity-25 text-center key-matrix" type="text">
+                        </div>
+                        <div class="row">
+                            <input class="col-4 bg-dark text-white bg-opacity-25 text-center key-matrix" type="text">
+                            <input class="col-4 bg-dark text-white bg-opacity-25 text-center key-matrix" type="text">
+                            <input class="col-4 bg-dark text-white bg-opacity-25 text-center key-matrix" type="text">
+                        </div>
+                        <div class="row">
+                            <input class="col-4 bg-dark text-white bg-opacity-25 text-center key-matrix" type="text">
+                            <input class="col-4 bg-dark text-white bg-opacity-25 text-center key-matrix" type="text">
+                            <input class="col-4 bg-dark text-white bg-opacity-25 text-center key-matrix" type="text">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-12 col-md-5 px-4 pt-4">
@@ -54,6 +70,6 @@
         </div>
     </main>
     
-    <script src="vidgener.js"></script>
+    <script src="matrix.js"></script>
 </body>
 </html>

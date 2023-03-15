@@ -138,3 +138,5 @@ window.onload = function () {
     document.querySelector('#encryptionBtn').onclick = encryption;
     document.querySelector('#decodeBtn').onclick = decode;
 }
+
+//Нужно вытгивать свои ноги, насколько позволяют простыни.

@@ -53,11 +53,9 @@ function decode() {
                 for (let g = 0; g < alfabet.length; g++) {
                     if (alfabet[j] == square[g][key] && (i == 0)) {
                         result += alfabet[g];
-                        flag = false;
                     }
                     else if ((alfabet[j] == square[g][lastletter])) {
                         result += alfabet[g];
-                        flag = false;
                     }
                 }
 

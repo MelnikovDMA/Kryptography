@@ -9,7 +9,7 @@ for (let i = 0; i < alfabet.length; i++) {
 
 function encryption() {
     let result = "";
-    let key = document.querySelector('#cipherKey').value;   
+    let key = document.querySelector('#cipherKey').value;
     let originalText = document.querySelector('#originalText').value;
     originalText = textFormatting(originalText);
     for (let i = 0; i < originalText.length; i++) {
