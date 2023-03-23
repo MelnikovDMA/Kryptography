@@ -100,7 +100,6 @@ function decode() {
     }
 
     let encryptedText = document.querySelector('#encryptedText').value;
-    encryptedText = textFormatting(encryptedText);
     if (encryptedText.length % 2 != 0) {
         encryptedText += "ф"
     }
@@ -139,6 +138,7 @@ function decode() {
         }
     }
 
+    result = textOfFormatting(result);
     document.querySelector('#answerText').value = result
 }
 
