@@ -14,7 +14,7 @@ function encryption() {
         return;
     }
 
-    if (aKey % 4 != 1 || aKey != 1) {
+    if (aKey % 4 != 1 || aKey == 1) {
         alert("Ключ а mod 4 должен быть равен 1 и ключ не должен быть равен 1");
         return;
     }
@@ -51,7 +51,7 @@ function decode() {
         return;
     }
 
-    if (aKey % 4 != 1 || aKey != 1) {
+    if (aKey % 4 != 1 || aKey == 1) {
         alert("Ключ а mod 4 должен быть равен 1 и ключ не должен быть равен 1");
         return;
     }
@@ -69,7 +69,10 @@ function decode() {
         }      
 
         tValue = (aKey * tValue + cKey) % 32;
-        
+
+        if (res > 32) {
+            res -= 32;
+        } 
         result += alfabet[res - 1]
     }
 
