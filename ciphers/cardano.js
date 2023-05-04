@@ -1,4 +1,4 @@
-let alfabet = "абвгдежзийклмнопрстуфхцчшщъыьэюя";
+let alphabet = "абвгдежзийклмнопрстуфхцчшщъыьэюя";
 
 function encryption() {
     let result = "";
@@ -170,14 +170,132 @@ function encryption() {
     
 }
 
+
 function decode() {
     let result = "";
-    let key = document.querySelector('#cipherKey').value;
+
     let encryptedText = document.querySelector('#encryptedText').value;
     
+    let matrixKey = document.querySelectorAll(".cardano-key");
+    let tempArray = [];
+    for (let i = 0; i < matrixKey.length; i++) {
+        tempArray.push(parseInt(matrixKey[i].value))
+    }
+    let matrix  = new Array(6);
+    let matrix2  = new Array(6);
+    let matrix3  = new Array(6);
+    let matrix4  = new Array(6);
 
+    for (let i = 0; i < matrix.length; i++) {
+        matrix[i] = new Array(10);
+        matrix2[i] = new Array(10);
+        matrix3[i] = new Array(10);
+        matrix4[i] = new Array(10);
+    }
 
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            matrix[i][j] = tempArray[i * 10 + j];
+        }
+    }
 
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            matrix2[i][j] = matrix[i][j];
+
+        }
+    }
+
+    for (i = 0; i < matrix2.length; i++) {
+        matrix2[i] = matrix2[i].reverse();
+    }
+
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            matrix3[i][j] = matrix2[i][j];
+
+        }
+    }
+
+    matrix3.reverse();
+
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            matrix4[i][j] = matrix3[i][j];
+
+        }
+    }
+    for (let i = 0; i < matrix4.length; i++) {
+        matrix4[i] = matrix4[i].reverse();
+    }
+
+    let alphasMatrix = new Array(matrix.length);
+    for (let i = 0; i < alphasMatrix.length; i++) {
+        alphasMatrix[i] = new Array(matrix[i].length);
+    }
+
+    let oneCounter = 0;
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            if (matrix[i][j] == 1) {
+                oneCounter += 1;
+            }
+        }
+    }
+
+    let allCombMatrix = new Array(4);
+    allCombMatrix[0] = matrix;
+    allCombMatrix[1] = matrix2;
+    allCombMatrix[2] = matrix3;
+    allCombMatrix[3] = matrix4;
+
+    let matrix4D = new Array(Math.ceil(encryptedText.length / (4 * oneCounter)));
+    for (let i = 0; i < matrix4D.length; i++) {
+        matrix4D[i] = JSON.parse(JSON.stringify(allCombMatrix))
+    }
+    let alphasMatrixArray = new Array(matrix4D.length);
+    for (let i = 0; i < alphasMatrixArray.length; i++) {
+        alphasMatrixArray[i] = JSON.parse(JSON.stringify(alphasMatrix));
+    }
+
+    for (let i = 0; i < alphasMatrixArray.length; i++) {
+        for (let j = 0; j < alphasMatrixArray[i].length; j++) {
+            for (let k = 0; k < alphasMatrixArray[i][j].length; k++) {
+                alphasMatrixArray[i][j][k] = encryptedText[(i * 60) + (j * 10 + k)];
+                console.log(encryptedText[(i * 60) + (j * 10 + k)]);
+            }
+        }
+    }
+
+    console.log(alphasMatrixArray);
+
+    if (oneCounter != 15) {
+        alert("В Вашей решётке ошибка (число единичных ячеек (отверстий) должно быть 60 / 4  = 15)")
+    }
+
+    oneCounter = 0;
+    let nullCounter = 0;
+
+    let resultMatrixArray = new Array(matrix4D.length);
+    for (let i = 0; i < resultMatrixArray.length; i++) {
+        let tempFL = new Array(matrix.length);
+        for (let j = 0; j < tempFL.length; j++) {
+            tempFL[j] = new Array(matrix[0].length);
+        }
+        resultMatrixArray[i] = tempFL;
+    }
+
+    for (let i = 0; i < matrix4D.length; i++) {
+        for (let j = 0; j < matrix4D[i].length; j++) {
+            for(let k = 0; k < matrix4D[i][j].length; k++) {
+                for (let l = 0; l < matrix4D[i][j][k].length; l++) {
+                    if (matrix4D[i][j][k][l] == 1) {
+                        result += alphasMatrixArray[i][k][l];
+                    }
+                }
+            }
+        }
+    }
 
     result = textOfFormatting(result);
     document.querySelector('#answerText').value = result;  
