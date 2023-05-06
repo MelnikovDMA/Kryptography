@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles.css">
 
-    <title>RSA</title>
+    <title>RSA Цифровая подпись</title>
 </head>
 
 <body class="main-bg">
@@ -21,7 +21,7 @@
     
     <main>
         <div class="container pt-1">
-            <h1 class="pb-2 text-center oran-text">RSA</h1>
+            <h1 class="pb-2 text-center oran-text">RSA Цифровая подпись</h1>
             <div class="heading-line mx-auto"></div>
 
             <div class="row pt-5 pb-4"> 
@@ -37,17 +37,17 @@
                     <h3 class="text-center oran-text pb-3">Ключи</h3>
                     <div class="input-group">
                         <input type="text" class="col-4 form-control bg-dark text-white bg-opacity-25 text-center" name="PKey" id="PKey" placeholder="P" value="3">
-                        <input type="text" class="col-4 form-control bg-dark text-white bg-opacity-25 text-center" name="QKey" id="QKey" placeholder="Q" value="5">
-                        <input type="text" class="col-4 form-control bg-dark text-white bg-opacity-25 text-center" name="EKey" id="EKey" placeholder="E" value="11">
+                        <input type="text" class="col-4 form-control bg-dark text-white bg-opacity-25 text-center" name="QKey" id="QKey" placeholder="Q" value="11">
+                        <input type="text" class="col-4 form-control bg-dark text-white bg-opacity-25 text-center" name="EKey" id="EKey" placeholder="E" value="9">
                     </div>
                 </div>
 
                 <div class="col-12 col-md-5 px-4 pt-4">
-                    <h3 class="text-center oran-text pb-3">Расшифрование</h3>
+                    <h3 class="text-center oran-text pb-3">Проверка подписи</h3>
             
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control bg-dark text-white bg-opacity-25" id="encryptedText" placeholder="Введите зашифрованный текст" aria-label="Введите зашифрованный текст">
-                        <button class="btn btn-outline-secondary oran-bg" type="button" id="decodeBtn">Расшифровать</button>
+                        <input type="text" class="form-control bg-dark text-white bg-opacity-25" id="SKey" placeholder="Введите ключ S" aria-label="Введите S">
+                        <button class="btn btn-outline-secondary oran-bg" type="button" id="decodeBtn">Проверить</button>
                     </div>
                 </div>
             </div>
@@ -58,6 +58,6 @@
         </div>
     </main>
     
-    <script src="rsa.js"></script>
+    <script src="rsa_signature.js"></script>
 </body>
 </html>

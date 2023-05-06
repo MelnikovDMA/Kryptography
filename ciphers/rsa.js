@@ -1,29 +1,25 @@
 let alfabet = "абвгдежзийклмнопрстуфхцчшщъыьэюя";
 
-var gcd = function(a, b) {
+function gcd(a, b) {
     if (!b) {
-      return a;
+        return a;
     }
-  
     return gcd(b, a % b);
 }
 
-function isCoPrime(e, f){
+function coPrimeEandF(e, f){
     let check = 1;
     while (check !=0 ) {
         if(gcd(e,f) == 1) {
-            check = 0
+            check = 0;
             //('Числа ', e, 'и', f, ' взаимно простые')
         }
         else {
-            alert('Числа ${e} и ${f} Не взаимно простые');
-            return;
-
+            return false;
         }
-
     }
-
-    return e;
+    
+    return true;
 }
 
 function testPandQ(num) {
@@ -61,12 +57,15 @@ function encryption() {
 
     let F = (keyP - 1) * (keyQ - 1);
 
-    isCoPrime(keyE, F);
+    if(!coPrimeEandF(keyE, F)) {
+        alert('Числа E и F Не взаимно простые');
+        return;
+    }
 
     let result = crypRsa(originalText, N, keyE);
     console.log(result);
 
-    document.querySelector('#answerText').value = result
+    document.querySelector('#answerText').value = result;
 }
 
 function dec_rsa(text, n, e, f){
@@ -101,21 +100,21 @@ function decode() {
     let keyQ = parseInt(document.getElementById('QKey').value);
     let keyE = parseInt(document.getElementById('EKey').value);
 
-    testPandQ(P);
-    testPandQ(Q);
+    testPandQ(keyP);
+    testPandQ(keyQ);
 
     let N = keyP * keyQ;
     console.log(N);
 
     let F = (keyP - 1) * (keyQ - 1);
 
-    isCoPrime(keyE, F);
+    coPrimeEandF(keyE, F);
 
     let result = dec_rsa(encryptedText, N, keyE, F);
     console.log(result);   
 
     result = textOfFormatting(result);
-    document.querySelector('#answerText').value = result
+    document.querySelector('#answerText').value = result;
 }
 
 function textFormatting(origText) {

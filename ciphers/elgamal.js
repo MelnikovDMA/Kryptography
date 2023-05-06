@@ -1,6 +1,6 @@
-let alfabet = "абвгдежзийклмнопрстуфхцчшщъыьэюя";
+let alfabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
 
-function gcd(a,b) {
+function gcd(a, b) {
     if (!b) {
         return a;
     }
@@ -35,43 +35,6 @@ function isCoPrime(k, f, random = false) {
   return k;
 }
 
-function cryp_elm(pr, p, g = 5, y = 31, f = 46, kArr) {
-  let n = pr.length;
-  let cryp_text = "";
-
-  for (let i = 0; i < n; i++) {
-    let k = kArr[i];
-
-    if (isCoPrime(k, f) == null) {
-        break
-    } else {
-        k = isCoPrime(k, f);
-
-    }
-    let a = g ** k % p;
-    let b = (y ** k * alfabet.indexOf(pr[i])) % p;
-
-    a = String(a);
-    if (a.length == 1) {
-        a = "0" + a;
-    }
-
-    b = String(b);
-    if (b.length == 1) {
-        b = "0" + b;
-    }
-
-    if (i != n-1) {
-        cryp_text = cryp_text + a.toString() + b.toString() + " ";
-    } else {
-        cryp_text = cryp_text + a.toString() + b.toString();
-    }
-    
-  }
-
-  return cryp_text;
-}
-
 function encryption() {
     let PKey = parseInt(document.getElementById("PKey").value);
     if (PKey < alfabet.length) {
@@ -91,6 +54,8 @@ function encryption() {
         return;
     }
 
+    let result = "";
+
     let originalText = document.querySelector('#originalText').value;
     originalText = textFormatting(originalText);
 
@@ -108,75 +73,84 @@ function encryption() {
         return;
     }
 
-    let y = GKey ** XKey % PKey;
+    let y = Number(BigInt(GKey) ** BigInt(XKey) % BigInt(PKey));
     let f = PKey - 1;
-    
-    document.querySelector('#answerText').value = cryp_elm(originalText, PKey, GKey, y, f, KKey);
-    // 3117 2327 1137 3115 2322 1141 3113 2328 1137 313 2327 1137 3122 234 115 3131 2327 1135 3111 2346 115 318 2346 110 3115 2327 1120 3112 2335 110 3112 2327 115 3136 2323 1137 3122 234 1145 3112 2327 1131 3117 
-}
 
-function dec_elm(enText, x, p) {
-    let decryp_text = "";
-  
-    let enTextArr = enText.split(" ");
-    for (let i = 0; i < enTextArr.length; i++) {
-        enTextArr[i] = enTextArr[i].match(/.{1,2}/g);
-    }
-    console.log(enTextArr + "bababuy");
+    for (let i = 0; i < originalText.length; i++) {
+        let k = KKey[i];
 
-    for (let i = 0; i < enTextArr.length; i++) {
-        let a = enTextArr[i][0];
-        let b = enTextArr[i][1];      
-        for (let j = 0; j < alfabet.length; j++) {
-            console.log((((a ** x) * i) % p) + "  " + (b % p));
-            if (((a ** x) * j) % p === (b % p)) {
-                decryp_text += alfabet[j];
-
-            }
+        if (isCoPrime(k, f) == null) {
+            break;
+        } else {
+            k = isCoPrime(k, f);
         }
-    }
+    
+        let a = String(Number(BigInt(GKey) ** BigInt(k) % BigInt(PKey)));
+        let b = String(Number((BigInt(y) ** BigInt(k) * BigInt(alfabet.indexOf(originalText[i]))) % BigInt(PKey)));
 
-    console.log(decryp_text);
-  
-    return decryp_text;
+        if (a.length == 1) {
+            a = "0" + a;
+        }
+
+        if (b.length == 1) {
+            b = "0" + b;
+        }
+
+        if (i != originalText.length-1) {
+            result = result + a.toString() + b.toString() + " ";
+        } else {
+            result = result + a.toString() + b.toString();
+        } 
+    }
+    
+    document.querySelector('#answerText').value = result;
 }
 
 function decode(){
     let PKey = parseInt(document.getElementById("PKey").value);
     let XKey = parseInt(document.getElementById("XKey").value);
-    let GKey = parseInt(document.getElementById("GKey").value);
-
     let encryptedText = document.querySelector('#encryptedText').value
 
-    let y = GKey ** XKey % PKey;
-    let f = PKey - 1;
+    let result = "";
 
-    let result = dec_elm(encryptedText, XKey, PKey);
+    let enTextArr = encryptedText.split(" ");
+    for (let i = 0; i < enTextArr.length; i++) {
+        enTextArr[i] = enTextArr[i].match(/.{1,2}/g);
+    }
+
+    for (let i = 0; i < enTextArr.length; i++) {
+        let a = enTextArr[i][0];
+        let b = enTextArr[i][1];      
+        for (let j = 0; j < alfabet.length; j++) {
+            if (Number(((BigInt(a) ** BigInt(XKey)) * BigInt(j)) % BigInt(PKey)) == (b % PKey)) {
+                result += alfabet[j];
+                console.log(j);
+            }
+        }
+    }
+
     document.querySelector('#answerText').value = textOfFormatting(result)
 }
 
 function generateK() {
-    let f = parseInt(document.getElementById("PKey").value) - 1;
-    let KKey = document.getElementById("KKey");
-    let k = "";
+    let fi = parseInt(document.getElementById("PKey").value) - 1;
+    let result = "";
     let originalText = document.querySelector('#originalText').value;
     originalText = textFormatting(originalText);
 
     let temp = 0;
 
     for (let i = 0; i < originalText.length; i++) {
-        temp = generateRandom(0, f);
-        while ((gcd(temp, f) != 1)){
-            temp = generateRandom(0, f)
-            console.log(temp + " " + f + "--" + gcd(temp, f) + "-gcd");
+        temp = generateRandom(0, fi);
+        while ((gcd(temp, fi) != 1)){
+            temp = generateRandom(0, fi)
         }
-        k += temp + " ";
-        console.log(k + "-123422131");
+        result += temp + " ";
     }
 
-    k = k.substring(0, k.length - 1);
+    result = result.substring(0, result.length - 1);
 
-    KKey.value = k;
+    document.getElementById("KKey").value = result;
     
 }
 
