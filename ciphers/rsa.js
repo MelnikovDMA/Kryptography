@@ -12,7 +12,6 @@ function coPrimeEandF(e, f){
     while (check !=0 ) {
         if(gcd(e,f) == 1) {
             check = 0;
-            //('Числа ', e, 'и', f, ' взаимно простые')
         }
         else {
             return false;
@@ -51,7 +50,11 @@ function encryption() {
         return;
     }
     
-
+    if (keyE <= 1 || keyE >= F) {
+        alert("Ключ К должен быть числом, которое больше 1 и меньше функции Эйлера");
+        return;
+    }
+    
     let N = keyP * keyQ;
     console.log(N);
 

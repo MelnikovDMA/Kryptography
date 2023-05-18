@@ -17,7 +17,8 @@
 
 .main-bg {
     background-color: rgb(15, 15, 15);
-    color: white;
+    color: rgb(15, 15, 15);
+    font-family: sans-serif;
 }
 
 .bg-dark {

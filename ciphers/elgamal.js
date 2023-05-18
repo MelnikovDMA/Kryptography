@@ -8,31 +8,31 @@ function gcd(a, b) {
 }
 
 function generateRandom(min = 0, max = 100) {
-  // find diff
-  let difference = max - min;
+    // find diff
+    let difference = max - min;
 
-  // generate random number
-  let rand = Math.random();
+    // generate random number
+    let rand = Math.random();
 
-  // multiply with difference
-  rand = Math.floor(rand * difference);
+    // multiply with difference
+    rand = Math.floor(rand * difference);
 
-  // add with min value
-  rand = rand + min;
+    // add with min value
+    rand = rand + min;
 
-  return rand;
+    return rand;
 }
 
 function isCoPrime(k, f, random = false) {
-  let check = 1;
-  while (check != 0) {
-    if (gcd(k, f) == 1) check = 0;
-    else {
+    let check = 1;
+    while (check != 0) {
+        if (gcd(k, f) == 1) check = 0;
+        else {
         alert("k[i] не взаимнопростой с Ф.Эйлера от числа P");
         return null;
-    } 
-  }
-  return k;
+        } 
+    }
+    return k;
 }
 
 function encryption() {
@@ -151,7 +151,6 @@ function generateK() {
     result = result.substring(0, result.length - 1);
 
     document.getElementById("KKey").value = result;
-    
 }
 
 function textFormatting(origText) {

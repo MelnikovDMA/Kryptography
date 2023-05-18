@@ -61,6 +61,7 @@ function encryption() {
         alert("Ключ К должен быть числом, которое больше 1 и меньше функции Эйлера");
         return;
     }
+    
     if (!coPrimeEandF(keyE, F)) {
         alert("Числа E и F Не взаимно простые");
         return;
