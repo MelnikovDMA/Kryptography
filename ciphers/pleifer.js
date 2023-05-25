@@ -3,6 +3,11 @@ let alfabet = "абвгдежзиклмнопрстуфхцчшщыьэюя";
 function encryption() {
     let result = "";
     let key = document.querySelector('#cipherKey').value;
+    let originalText = document.querySelector('#originalText').value;
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
 
     let doubleLetter = [...new Set(key)];
     if (doubleLetter.length != key.length) {
@@ -24,15 +29,6 @@ function encryption() {
             matrix[i][j] = stroka[i * 6 + j]
         }
     }
-
-    let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
-    
-    // for (let i = 0; i < originalText.length; i+=2) {
-    //     if (originalText[i] == originalText[i + 1]) {
-
-    //     }
-    // }
     
     if (originalText.length % 2 != 0) {
         originalText += "ф"
@@ -74,14 +70,11 @@ function encryption() {
     }
 
     document.querySelector('#answerText').value = result;
-
 }
-
-
-
 
 function decode() {
     let result = "";
+    let encryptedText = document.querySelector('#encryptedText').value;
     let key = document.querySelector('#cipherKey').value;
 
     let stroka = key;
@@ -99,7 +92,6 @@ function decode() {
         }
     }
 
-    let encryptedText = document.querySelector('#encryptedText').value;
     if (encryptedText.length % 2 != 0) {
         encryptedText += "ф"
     }
@@ -138,7 +130,10 @@ function decode() {
         }
     }
 
-    result = textOfFormatting(result);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		result = textOfFormatting(result);
+	}
     document.querySelector('#answerText').value = result
 }
 

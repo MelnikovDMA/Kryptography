@@ -35,7 +35,10 @@ function encryption() {
     let result = "";
 
     let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
 
     let keySimbols = document.querySelector('#cipherKey').value;
 
@@ -223,7 +226,10 @@ function decode() {
     }
     console.log(alfabetResult);
 
-    alfabetResult = textOfFormatting(alfabetResult);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		alfabetResult = textOfFormatting(alfabetResult);
+	}
     document.querySelector('#answerText').value = alfabetResult;  
 }
 

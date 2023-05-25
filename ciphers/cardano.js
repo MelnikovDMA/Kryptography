@@ -4,7 +4,10 @@ function encryption() {
     let result = "";
 
     let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
     
     let matrixKey = document.querySelectorAll(".cardano-key");
     let tempArray = [];
@@ -297,7 +300,10 @@ function decode() {
         }
     }
 
-    result = textOfFormatting(result);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		result = textOfFormatting(result);
+	}
     document.querySelector('#answerText').value = result;  
 }
 

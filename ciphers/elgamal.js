@@ -36,6 +36,13 @@ function isCoPrime(k, f, random = false) {
 }
 
 function encryption() {
+    let result = "";
+    let originalText = document.querySelector('#originalText').value;
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
+
     let PKey = parseInt(document.getElementById("PKey").value);
     if (PKey < alfabet.length) {
         alert("p > Mi");
@@ -53,11 +60,6 @@ function encryption() {
         alert("1 < g < p");
         return;
     }
-
-    let result = "";
-
-    let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
 
     let KKey = document.getElementById("KKey").value.split(" ");
     for (let i = 0; i < KKey.length; i++) {
@@ -129,7 +131,11 @@ function decode(){
         }
     }
 
-    document.querySelector('#answerText').value = textOfFormatting(result)
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		result = textOfFormatting(result);
+	}
+    document.querySelector('#answerText').value = result;
 }
 
 function generateK() {

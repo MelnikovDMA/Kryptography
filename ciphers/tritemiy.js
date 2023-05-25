@@ -10,7 +10,11 @@ for (let i = 0; i < alfabet.length; i++) {
 function encryption() {
     let result = "";
     let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
+    
     for (let i = 0; i < originalText.length; i++) {
         for (let j = 0; j < alfabet.length; j++) {
             if (originalText[i] == alfabet[j]) {
@@ -33,7 +37,10 @@ function decode() {
         }
     }
 
-    result = textOfFormatting(result);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		result = textOfFormatting(result);
+	}
     document.querySelector('#answerText').value = result;  
 }
 

@@ -46,7 +46,10 @@ function generateK() {
 
 function encryption() {
     let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
 
     let keyP = parseInt(document.getElementById('PKey').value);
     let keyQ = parseInt(document.getElementById('QKey').value);
@@ -108,10 +111,13 @@ function encryption() {
 
 function decode() {
     let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
 
-    let r = document.querySelector('#RKey').value;
-    let s = document.querySelector('#SKey').value;
+    let r = parseInt(document.querySelector('#RKey').value);
+    let s = parseInt(document.querySelector('#SKey').value);
     let keyP = parseInt(document.getElementById('PKey').value);
     let keyQ = parseInt(document.getElementById('QKey').value);
     let keyA = parseInt(document.getElementById('AKey').value);

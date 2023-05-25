@@ -1,3 +1,14 @@
+body::-webkit-scrollbar {
+    background-color: black;
+    width: 15px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 151, 5);
+    opacity: 0;
+    border-radius: 7px;
+}
+
 .icon-home {
     height: 70px;
     margin: 20px;
@@ -22,7 +33,11 @@
 }
 
 .bg-dark {
-    border-color:  rgb(255, 151, 5);
+    border-color:rgb(255, 151, 5);
+}
+
+.text-gray {
+    color:rgb(98, 96, 91);
 }
 
 .btn-outline-secondary {

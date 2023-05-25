@@ -38,7 +38,10 @@ function coPrimeEandF(e, f){
 
 function encryption() {
     let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
 
     let keyP = parseInt(document.getElementById('PKey').value);
     let keyQ = parseInt(document.getElementById('QKey').value);
@@ -88,7 +91,10 @@ function encryption() {
 
 function decode() {
     let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
 
     let S = parseInt(document.querySelector('#SKey').value);  
     let keyP = parseInt(document.getElementById('PKey').value);

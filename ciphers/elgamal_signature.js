@@ -38,7 +38,10 @@ function primeTest(n) {
 
 function encryption() {
     let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
 
     let keyP = parseInt(document.getElementById('PKey').value);
     let keyG = parseInt(document.getElementById('GKey').value);
@@ -93,7 +96,10 @@ function encryption() {
 
 function decode(){
     let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
 
     let keyP = parseInt(document.getElementById('PKey').value);
     let keyG = parseInt(document.getElementById('GKey').value);

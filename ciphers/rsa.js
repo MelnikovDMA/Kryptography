@@ -39,7 +39,10 @@ function crypRsa(pr, n, e){
 
 function encryption() {
     let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
 
     let keyP = parseInt(document.getElementById('PKey').value);
     let keyQ = parseInt(document.getElementById('QKey').value);
@@ -116,7 +119,10 @@ function decode() {
     let result = dec_rsa(encryptedText, N, keyE, F);
     console.log(result);   
 
-    result = textOfFormatting(result);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		result = textOfFormatting(result);
+	}
     document.querySelector('#answerText').value = result;
 }
 

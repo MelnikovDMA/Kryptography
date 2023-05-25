@@ -3,7 +3,10 @@ let alfabet = "абвгдежзийклмнопрстуфхцчшщъыьэюя"
 function encryption() {
     let result = "";
     let originalText = document.querySelector('#originalText').value;
-    originalText = textFormatting(originalText);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		originalText = textFormatting(originalText);
+	}
     let key = document.querySelector('#cipherKey').value;
 
     let matrix = new Array(Math.ceil(originalText.length / key.length));
@@ -101,7 +104,10 @@ function decode() {
         }
     }
 
-    result = textOfFormatting(result);
+    let chbox = document.querySelector('#formatCheckbox');
+    if (chbox.checked) {
+		result = textOfFormatting(result);
+	}
     document.querySelector('#answerText').value = result
 };
 
